@@ -1,0 +1,31 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-4 col-mg-6 col-sm-12" *ngFor="let comics of comicsArray" (click)="singleComic(comics.id)">
+            <div class="flip-card my-5" tabIndex="0">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="{{comics.thumbnail.path}}/portrait_uncanny.{{comics.thumbnail.extension}}" alt="">
+                    </div>
+                    <div class="flip-card-back">
+                        <h3 *ngIf="comics.digitalId===0">Digital Print Available</h3>
+                        <h3 *ngIf="comics.digitalId>0">Digital Print Available</h3>
+                    </div>
+                </div>
+            </div>
+            <h3 class="text-center text-dark">{{comics.title}}</h3>
+        </div>
+    </div>
+    <div class="my-5">
+        <!--         <button class="btn btn-primary" #previous (click)="offsetValueUpdate(previous.innerHTML)"
+            *ngIf="offset>0">Previous Page</button>
+        <button class="btn btn-secondary" #next (click)="offsetValueUpdate(next.innerHTML)">Next Page</button> -->
+        <mat-paginator
+        [length]="totalComicsCount" 
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        [pageSizeOptions]="[20,40,60,80,100]"
+        *ngIf="show"
+        (page)="pageEvent = pagination($event)" showFirstLastButtons="false">
+        </mat-paginator>
+    </div>
+</div>
